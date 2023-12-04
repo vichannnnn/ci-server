@@ -13,10 +13,11 @@ jobs:
           API_USERNAME: ${{ secrets.API_USERNAME }}
           API_PASSWORD: ${{ secrets.API_PASSWORD }}
         run: |
-          JWT_TOKEN=$(curl -s -X POST "https://api.lambda.grail.moe/api/v1/login" \
+          RESPONSE=$(curl -s -X POST "https://api.lambda.grail.moe/api/v1/login" \
           -H "Content-Type: application/json" \
-          -d '{"username": "${{ env.API_USERNAME }}", "password": "${{ env.API_PASSWORD }}"}' | jq -r '.token')
-          
+          -d '{"username": "${{ env.API_USERNAME }}", "password": "${{ env.API_PASSWORD }}"}')
+          echo "Login Response: $RESPONSE"
+          JWT_TOKEN=$(echo $RESPONSE | jq -r '.token')
           echo "JWT_TOKEN=$JWT_TOKEN" > jwt.env
 
       - name: Upload JWT Token as Artifact
