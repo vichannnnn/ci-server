@@ -43,4 +43,4 @@ jobs:
         run: |
           source jwt.env
           curl -X GET "https://api.lambda.grail.moe/api/v1/hello" \
-          -H "Authorization: Bearer $JWT_TOKEN"
+          -H "authorization: Bearer $JWT_TOKEN"
