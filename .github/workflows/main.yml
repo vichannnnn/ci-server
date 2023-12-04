@@ -15,7 +15,7 @@ jobs:
         run: |
           RESPONSE=$(curl -s -X POST "https://api.lambda.grail.moe/api/v1/login" \
           -H "Content-Type: application/json" \
-          -d '{"username": "${{ env.API_USERNAME }}", "password": "${{ env.API_PASSWORD }}"}' | jq -r '.token')
+          -d '{"username": "${{ env.API_USERNAME }}", "password": "${{ env.API_PASSWORD }}"}')
           
           BODY=$(echo $RESPONSE | jq -r '.body')
           JWT_TOKEN=$(echo $BODY | jq -r '.access_token')
